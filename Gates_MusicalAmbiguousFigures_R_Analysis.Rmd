@@ -1,0 +1,282 @@
+---
+Title: "Musical Ambiguous Figure Data Analysis"
+
+Author: "Sarah Gates"
+
+Contact: "sarahgates22@gmail.com"
+
+Date: "Summer, 2022"
+
+output: html_notebook
+---
+
+This R notebook contains the statistical analysis for my Musical Ambiguous Figures project. In the first section, I perform the statistical analyses on the first dependent variable, ease of hearing ratings. I first xamine the assumptions for parametric statistical analysis (outliers, normality), then perform 
+
+
+First, I will load the required packages:
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+```
+
+# Statistical Analysis: Dependent Variable 1 (Ease of Hearing Ratings)
+
+In this section, I perform the analyses on the first dependent variable. 
+
+```{r}
+# loading the data
+df <- readfile <- read.csv("data/amb_DV1_fin.csv")
+
+# view the data
+View(df)
+
+# Examine the data contents and data types
+str(df)
+```
+
+## 1. Cursory Exploratory Data Analysis
+
+```{r}
+# grouping by the different IVs
+df %>%
+  group_by(Sonata_Section, Feature, Mod_Type, Expertise_Group) %>%
+  get_summary_stats(DV, type = "mean_sd")
+```
+Following this, I will visualize, using a box plot, the 
+
+```{r}
+bxp <- ggboxplot(
+  df, x = "Feature", y = "DV",
+  color = "Mod_Type", palette = "jco",
+  facet.by = "Sonata_Section", short.panel.labs = FALSE
+  )
+print(bxp)
+```
+### Outliers
+
+Then I will use 'identify outliers' on the DV, grouped by all levels of the IVs: this shows that several participants have outlier values, including participants 495,473,268, 475, 834,883, 862 and 392. This shows that within each of these subgroups of IVS (e.g. Exposition-Bass-Prinner-Expert), that their individual value for the DV is considered an outlier. 
+
+```{r}
+df %>%
+  group_by(Sonata_Section, Feature, Mod_Type, Expertise_Group) %>%
+  identify_outliers(DV)
+```
+### Assumption of Normality: Shapiro-Wilk Test
+
+Secondly, we can use the Shapiro-Wilk test to examine whether the DV is normally distributed across levels of the IV:
+
+```{r}
+df %>%
+  group_by(Sonata_Section, Feature, Mod_Type) %>%
+  shapiro_test(DV)
+```
+#### QQ Plot
+
+Given that all of the p-values are significant here, it is evident that there are sphericity violations in this dataset. As such, Greenhouse-Geisser corrections to p-values will be applied where applicable. 
+
+We can also visualize these violations using QQplots: 
+
+```{r}
+ggqqplot(df, "DV", ggtheme = theme_bw()) +
+  facet_grid(Sonata_Section ~ Feature ~ Mod_Type, labeller = "label_both")
+```
+### Assumption of Homogeneity of Variance: Levene Test
+
+We can also test for homogeneity of variance using the Levene Test. This shows that there is homogeneity of variances (p > 0.05) for all factors except for the Exposition version of the Bassline Romanesca schema (p = 0.02)
+
+```{r}
+df %>%
+  group_by(Sonata_Section, Feature, Mod_Type) %>%
+  levene_test(DV ~ Expertise_Group)
+```
+
+We can also check the variance for Excerpt Familiarity, which has equal variance (p > 0.05).
+
+```{r}
+df %>%
+  group_by(Sonata_Section, Feature, Mod_Type) %>%
+  levene_test(DV ~ Excerpt_Familiarity)
+```
+
+Lastly, we can visualize the mean and standard deviations for the dependent variable, grouped by the levels of factors for reference following the ANOVA (see below).
+
+```{r}
+df %>%
+  group_by(Sonata_Section, Feature, Mod_Type, Expertise_Group) %>%
+  get_summary_stats(DV, type = "mean_sd")
+```
+
+## 2. Four-Way Mixed ANOVA: 2*3*2 Factorial Design (Sonata Section, Feature, Modulation Type)
+
+Here I perform a 2*3*2 factorial mixed ANOVA in order to examine the effects of Sonata Section (exposition, recap), attended Feature (bass, soprano, schema), and Modulation Type (Romanesca, Prinner) on ease of hearing ratings. 
+
+```{r}
+# Compute RM ANOVA for within and between subjects factors
+res.aov.bet <- anova_test(
+  data = df, dv = DV, wid = Random_IDs,
+  within = c(Sonata_Section, Feature, Mod_Type), between=Expertise_Group
+  )
+get_anova_table(res.aov.bet, correction="GG")
+res.aov.bet$`Sphericity Corrections`
+```
+
+**Summary of Findings**
+
+This shows that there was a significant main effect of expertise (p = 0.01), feature (p = 0.009), and modulation type (p = 0.007), as well as significant two way interactions between expertise group and sonata section (p), expertise group and modulation type, sonata section and feature, and feature and modulation type. 
+
+I will now examine each of these effects using Tukey HSD tests to determine which pair-wise differences the significant effects stems from. 
+
+
+### Examining the Main Effects
+
+Here, I examine the main effects using tuckey hsd tests on each statistically significant main effect. 
+
+**Expertise**
+
+```{r}
+# Examine Main Effects
+
+#Expertise
+
+# tukey method 1
+aov(DV ~ Expertise_Group, data = df3) %>% tukey_hsd()
+
+# t-test with bonferroni correction
+df %>% t_test(DV ~ Expertise_Group, p.adjust.method = "bonferroni")
+
+# tukey method 2
+df %>% tukey_hsd(DV ~ Expertise_Group, conf.level = 0.95)
+
+```
+
+This shows
+
+```{r}
+df %>%
+  group_by(Expertise_Group) %>%
+  get_summary_stats(DV, type = "mean_sd")
+```
+
+
+**Feature**
+
+```{r}
+# Feature
+
+# tukey method 1
+aov(DV ~ Feature, data = df3) %>% tukey_hsd()
+
+# t-test with bonferroni correction
+df %>% t_test(DV ~ Feature, p.adjust.method = "bonferroni")
+
+# tukey method 2
+df %>% tukey_hsd(DV ~ Feature, conf.level = 0.95)
+
+```
+
+WOOT
+
+```{r}
+df %>%
+  group_by(Feature) %>%
+  get_summary_stats(DV, type = "mean_sd")
+```
+
+**Modulation Type**
+
+```{r}
+#Mod Type
+
+# tukey 1
+aov(DV ~ Mod_Type, data = df) %>% tukey_hsd()
+
+# t-test with bonferroni correction
+df %>% t_test(DV ~ Mod_Type, p.adjust.method = "bonferroni")
+
+# tukey 2
+df %>% tukey_hsd(DV ~ Mod_Type, conf.level = 0.95)
+
+```
+
+
+yay
+```{r}
+df %>%
+  group_by(Mod_Type) %>%
+  get_summary_stats(DV, type = "mean_sd")
+```
+### Examining Two-Way Interactions
+
+Here I will examine the significant two way interactions between expertise group and sonata section (p), expertise group and modulation type, sonata section and modulation type, and feature and modulation type.
+
+**Expertise and Sonata Section**
+
+```{r}
+# Two Way Interactions
+
+# Expertise Group by Feature
+
+aov(DV ~ Expertise_Group*Feature, data = df3) %>% tukey_hsd()
+
+df %>%
+  group_by(Expertise_Group) %>%
+  tukey_hsd(DV ~ Feature, conf.level = 0.95)
+  
+df %>%
+  group_by(Expertise_Group, Feature) %>%
+  get_summary_stats(DV, type = "mean_sd") 
+```
+
+
+**Expertise and Modulation**
+
+```{r}
+# Expertise Group by Modulation Type
+
+aov(DV ~ Expertise_Group*Mod_Type, data = df3) %>% tukey_hsd()
+
+df %>%
+  group_by(Expertise_Group) %>%
+  tukey_hsd(DV ~ Mod_Type, conf.level = 0.95)
+  
+df %>%
+  group_by(Expertise_Group, Mod_Type) %>%
+  get_summary_stats(DV, type = "mean_sd") 
+```
+
+**Sonata Section and Feature**
+
+```{r}
+# Sonata Section by Feature
+
+
+aov(DV ~ Sonata_Section*Feature, data = df3) %>% tukey_hsd()
+
+df %>%
+  group_by(Sonata_Section) %>%
+  tukey_hsd(DV ~ Feature, conf.level = 0.95)
+  
+df %>%
+  group_by(Sonata_Section, Feature) %>%
+  get_summary_stats(DV, type = "mean_sd")
+```
+
+**Feature and Modulation Type**
+
+```{r}
+# Feature by Modulation Type
+
+aov(DV ~ Feature*Mod_Type, data = df3) %>% tukey_hsd()
+
+df %>%
+  group_by(Feature) %>%
+  tukey_hsd(DV ~ Mod_Type, conf.level = 0.95)
+  
+df %>%
+  group_by(Feature, Mod_Type) %>%
+  get_summary_stats(DV, type = "mean_sd")
+```
+
