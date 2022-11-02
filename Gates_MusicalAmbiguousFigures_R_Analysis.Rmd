@@ -1,14 +1,15 @@
 ---
-Title: "Musical Ambiguous Figure Data Analysis"
-
-Author: "Sarah Gates"
-
-Contact: "sarahgates22@gmail.com"
-
-Date: "Summer, 2022"
+title: "Musical Ambiguous Figure Data Analysis"
 
 output: html_notebook
 ---
+# Musical Ambiguous Figures Project: Data Analysis
+
+**Author:** Sarah Gates
+**Contact** sarahgates22@gmail.com
+**Date:** Summer, 2022
+
+## Introduction
 
 This R notebook contains the statistical analysis for my Musical Ambiguous Figures project. In the first section, I perform the statistical analyses on the first dependent variable, ease of hearing ratings. I first xamine the assumptions for parametric statistical analysis (outliers, normality), then perform 
 
@@ -120,19 +121,25 @@ res.aov.bet <- anova_test(
   within = c(Sonata_Section, Feature, Mod_Type), between=Expertise_Group
   )
 get_anova_table(res.aov.bet, correction="GG")
+```
+
+I will also output the greenhouse geisser corrections:
+
+```{r}
 res.aov.bet$`Sphericity Corrections`
 ```
 
+
 **Summary of Findings**
 
-This shows that there was a significant main effect of expertise (p = 0.01), feature (p = 0.009), and modulation type (p = 0.007), as well as significant two way interactions between expertise group and sonata section (p), expertise group and modulation type, sonata section and feature, and feature and modulation type. 
+This shows that there was a significant main effect of expertise (p = 0.007), feature (p < 0.001), and modulation type (p = 0.043), as well as significant two way interactions between expertise group and feature (p = 0.030), expertise group and modulation type (p = 0.024), sonata section and feature (p = 0.006), and feature and modulation type (p = 0.010). 
 
-I will now examine each of these effects using Tukey HSD tests to determine which pair-wise differences the significant effects stems from. 
+I will now examine each of these effects using non-parametrics Tukey HSD tests to determine which pair-wise differences the significant effects stem from. 
 
 
 ### Examining the Main Effects
 
-Here, I examine the main effects using tuckey hsd tests on each statistically significant main effect. 
+Here, I examine the main effects using non-parametric tuckey hsd tests on each statistically significant main effect. 
 
 **Expertise**
 
@@ -141,18 +148,11 @@ Here, I examine the main effects using tuckey hsd tests on each statistically si
 
 #Expertise
 
-# tukey method 1
-aov(DV ~ Expertise_Group, data = df3) %>% tukey_hsd()
-
-# t-test with bonferroni correction
-df %>% t_test(DV ~ Expertise_Group, p.adjust.method = "bonferroni")
-
-# tukey method 2
+# tukey 
 df %>% tukey_hsd(DV ~ Expertise_Group, conf.level = 0.95)
 
 ```
 
-This shows
 
 ```{r}
 df %>%
@@ -160,123 +160,250 @@ df %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
 
+This analysis shows that both expert (M = 5.13, sd = 2.21) and intermediate (M = 5.35, sd = 1.60) groups differ from the novice (M = 3.56, sd = 2.17) group. Both expert and intermediate ease of hearing ratings are significantly higher than novice ease of hearing ratings. 
 
 **Feature**
 
 ```{r}
 # Feature
 
-# tukey method 1
-aov(DV ~ Feature, data = df3) %>% tukey_hsd()
-
-# t-test with bonferroni correction
-df %>% t_test(DV ~ Feature, p.adjust.method = "bonferroni")
-
-# tukey method 2
 df %>% tukey_hsd(DV ~ Feature, conf.level = 0.95)
 
 ```
 
-WOOT
 
 ```{r}
 df %>%
   group_by(Feature) %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
+
+The main effect of feature stems from the significant difference between bass (M = 5.44, sd = 1.62) and soprano (M = 4.38, sd = 2.08) features. This suggests that the soprano line was the most difficult to hear and attend to.
 
 **Modulation Type**
 
 ```{r}
 #Mod Type
 
-# tukey 1
-aov(DV ~ Mod_Type, data = df) %>% tukey_hsd()
-
-# t-test with bonferroni correction
-df %>% t_test(DV ~ Mod_Type, p.adjust.method = "bonferroni")
-
-# tukey 2
 df %>% tukey_hsd(DV ~ Mod_Type, conf.level = 0.95)
 
 ```
 
 
-yay
 ```{r}
 df %>%
   group_by(Mod_Type) %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
+The main effect of modulation type shows that the Prinner (M = 5.18, sd = 1.95) was easier to hear than the Romanesca (M = 4.65, sd = 2.02). 
+
 ### Examining Two-Way Interactions
 
-Here I will examine the significant two way interactions between expertise group and sonata section (p), expertise group and modulation type, sonata section and modulation type, and feature and modulation type.
+In this section, I examine the significant two way interactions between expertise group and feature (p = 0.030), expertise group and modulation type (p = 0.024), sonata section and feature (p = 0.006), and feature and modulation type (p = 0.010). 
 
-**Expertise and Sonata Section**
+**Expertise and Feature**
 
 ```{r}
 # Two Way Interactions
 
 # Expertise Group by Feature
 
-aov(DV ~ Expertise_Group*Feature, data = df3) %>% tukey_hsd()
-
 df %>%
   group_by(Expertise_Group) %>%
   tukey_hsd(DV ~ Feature, conf.level = 0.95)
   
+```
+
+
+```{r}
 df %>%
   group_by(Expertise_Group, Feature) %>%
   get_summary_stats(DV, type = "mean_sd") 
 ```
 
+The post-hoc Tukey HSD examining the interaction between expertise group and feature shows that for only the novice group did the bass (M = 4.88, sd = 2.07) and soprano (M = 2.51, sd = 1.62) differ significantly. 
 
 **Expertise and Modulation**
 
 ```{r}
 # Expertise Group by Modulation Type
 
-aov(DV ~ Expertise_Group*Mod_Type, data = df3) %>% tukey_hsd()
-
 df %>%
   group_by(Expertise_Group) %>%
   tukey_hsd(DV ~ Mod_Type, conf.level = 0.95)
-  
+```
+
+
+```{r}
 df %>%
   group_by(Expertise_Group, Mod_Type) %>%
   get_summary_stats(DV, type = "mean_sd") 
 ```
+The analysis examining the interaction of expertise group and modulation type shows that only for the expert group did Prinner (M = 6.34, sd = 1.50) and Romanesca (M = 4.02, sd = 2.08) schema differ. 
 
 **Sonata Section and Feature**
 
 ```{r}
 # Sonata Section by Feature
 
-
-aov(DV ~ Sonata_Section*Feature, data = df3) %>% tukey_hsd()
-
 df %>%
   group_by(Sonata_Section) %>%
   tukey_hsd(DV ~ Feature, conf.level = 0.95)
   
+```
+
+
+```{r}
 df %>%
   group_by(Sonata_Section, Feature) %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
+The Tukey HSD test on the interaction between sonata section and feature revealed that only for the recapitulation did soprano (M = 4.17, sd = 2.13) and bass (M = 5.59, sd = 1.44) significantly differ. 
 
 **Feature and Modulation Type**
 
 ```{r}
 # Feature by Modulation Type
 
-aov(DV ~ Feature*Mod_Type, data = df3) %>% tukey_hsd()
-
 df %>%
   group_by(Feature) %>%
   tukey_hsd(DV ~ Mod_Type, conf.level = 0.95)
   
+```
+
+```{r}
 df %>%
   group_by(Feature, Mod_Type) %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
+The post hoc Tukey HSD test revealed that for the schema attending condition only did Prinner (M = 5.70, sd = 1.81) and Romanesca (M = 4.15, sd = 2.17) interpretations differ. 
+
+### Examining Effect of Stimuli Presentation Order
+
+In order to examine in the order in which stimuli was presented had an effect on interpretation formation, a second ANOVA including Sonata Order as a between-subjects factor, in addition to expertise group, was completed. This showed however that there was no effect of order of presentation of sonata section on the DV. 
+
+```{r}
+res.aov.order <- anova_test(
+  data = df, dv = DV, wid = Random_IDs,
+  within = c(Sonata_Section, Feature, Mod_Type), between=c(Expertise_Group, Sonata_Order)
+  )
+get_anova_table(res.aov.order)
+```
+
+# Statistical Analysis: Dependent Variable 2 (Ease of Change Ratings)
+
+```{r}
+# loading the data
+df2 <- readfile <- read.csv("data/amb_DV2_fin.csv")
+
+# view the data
+View(df2)
+
+# Examine the data contents and data types
+str(df2)
+
+```
+
+## 1. Cursory EDA 
+
+```{r}
+df2 %>%
+  group_by(Feature) %>%
+  get_summary_stats(DV2, type = "mean_sd")
+```
+
+```{r}
+bxp2 <- ggboxplot(
+  df2, x = "Sonata_Section", y = "DV2",
+  color = "Feature", palette = "jco",
+  facet.by = "Expertise_Group", short.panel.labs = FALSE
+  )
+print(bxp2)
+```
+
+```{r}
+df2 %>%
+  group_by(Sonata_Section, Feature, Expertise_Group) %>%
+  identify_outliers(DV2)
+```
+
+### Assumption of Normality: Shapiro-Wilk Test
+
+Secondly, we can use the Shapiro-Wilk test to examine whether the DV is normally distributed across levels of the IV:
+
+```{r}
+df2 %>%
+  group_by(Sonata_Section, Feature) %>%
+  shapiro_test(DV2)
+```
+
+### GG Plot
+
+```{r}
+ggqqplot(df2, "DV2", ggtheme = theme_bw()) +
+  facet_grid(Sonata_Section ~ Feature , labeller = "label_both")
+```
+### Assumption of Homogeneity of Variance: Levene Test
+
+```{r}
+df2 %>%
+  group_by(Sonata_Section, Feature) %>%
+  levene_test(DV2 ~ Expertise_Group)
+```
+
+## 2. Three-Way Mixed ANOVA: 2*3 Factorial Design (Sonata Section, Feature)
+
+A mixed ANOVA was performed in order to examine the effects of two within subject factors (sonata section and feature) as well as one between subject factor (expertise group) on DV2, ease of change rating.
+
+```{r}
+res.aov.bet2 <- anova_test(
+  data = df2, dv = DV2, wid = Random_IDs,
+  within = c(Sonata_Section, Feature), between=Expertise_Group
+)
+get_anova_table(res.aov.bet2, correction="GG")
+```
+
+
+```{r}
+res.aov.bet2$'Sphericity Corrections'
+```
+
+The analysis revealed that there were only main effets of expertise group (p = 0.024) and feature (p = 0.022).
+
+### Examining the Main Effects
+
+Here I will use Tukey HSD tests to examine the main effects. 
+
+**Expertise**
+
+```{r}
+df2 %>%
+  tukey_hsd(DV2 ~ Expertise_Group, conf.level = 0.95)
+```
+
+```{r}
+df2 %>%
+  group_by(Expertise_Group) %>%
+  get_summary_stats(DV2, type = "mean_sd")
+```
+
+As was the case with DV1 (ease of hearing ratings), both expert (M = 3.57, sd = 2.06) and intermediate (M = 4.48, sd = 1.75) differed from the novice (M = 1.87, sd = 1.50), indicating that novices struggled to change interpretations. 
+
+**Feature**
+
+```{r}
+df2 %>%
+  tukey_hsd(DV2 ~ Feature, conf.level = 0.95)
+
+```
+
+```{r}
+
+df2 %>%
+  group_by(Feature) %>%
+  get_summary_stats(DV2, type = "mean_sd")
+```
+
+While the ANOVA revealed a significant effect of feature for DV2, the more conservative nonparametric Tukey HSD test showed that all pair-wise differences of feature were nonsignificant. 
+
 
