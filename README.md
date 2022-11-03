@@ -77,13 +77,7 @@ asked to alternate between the two provided interpretations and rate the ease of
 2) diffuse or shifting attention, prompted through assessing an interpretation of an ordering of Galant schemata. 
 
 Unlike focusing on a scale degree interpretation in a single voice, hearing a passage as a schema requires attending to multiple, co-occurring 
-features at once. Because the latter requires more attentional resources (WM) and more active simulator traces (LTM), hearing and alternating a 
-schema interpretation is likely more challenging. The final portion of the survey collected general information regarding the participants’ music 
-theory training (years of training), their experience with scale degrees and Galant schemata, and their familiarity with the sonata movement in the 
-study. Taken together, the information gathered in the first part of the study addresses the first and second research questions above (i.e., whether 
-the excerpts are bistable, and if bistability changes with conceptual prompt and auditory attending strategy), and the biographical information regarding 
-music theory training gathered at the end of the survey addresses the final research question (i.e., whether the results observed depend on previous 
-training and experience). 
+features at once. Because the latter requires more attentional and memory resources, hearing and alternating a schema interpretation is likely more challenging. The final portion of the survey collected general information regarding the participants’ music theory training (years of training), their experience with scale degrees and Galant schemata, and their familiarity with the sonata movement in the study. Taken together, the information gathered in the first part of the study addresses the first and second research questions above (i.e., whether the excerpts are bistable, and if bistability changes with conceptual prompt and auditory attending strategy), and the biographical information regarding music theory training gathered at the end of the survey addresses the final research question (i.e., whether the results observed depend on previous training and experience). 
 
 ## Participants ## 
 
@@ -117,9 +111,8 @@ online posts (Society for Music Theory Humanities Commons page).
 
 The experimental body of the survey gathered ease of hearing and ease of change ratings for the two excerpts from the Presto of K. 280. 
 The survey was organized into two main blocks (exposition, recapitulation), which contained three blocks for each attentional condition 
-bass line, soprano line, schemata). Each attentional condition (bass, soprano, schemata) contained three trials each, one rating for each 
-interpretation, and one rating for the ease of change between the two presented interpretations. This resulted in a total of 18 trials. The 
-presentation order of the excerpts was randomized such that the exposition or recapitulation blocks could be presented in either order, the 
+(bass line, soprano line, schemata). Each attentional condition (bass, soprano, schemata) contained three trials each, one rating for each 
+interpretation (e.g., Prinner, Romanesca), and one rating for the ease of change between the two presented interpretations. This resulted in a total of 18 trials. The presentation order of the excerpts was randomized such that the exposition or recapitulation blocks could be presented in either order, the 
 attentional condition blocks (bass, soprano, schema) could be presented in any order, and within each condition, the order of presentation of 
 each interpretation trials (e.g., Prinner, Romanesca) was randomized. Before starting the first set of ratings in either the exposition or 
 recapitulation, participants were prompted to listen to the excerpt without any interpretation provided. Once within a given block (e.g., Recapitulation)
@@ -155,7 +148,7 @@ and
 
 **H1b:** Furthermore, the availability of and ease of change between interpretations may differ between the expositional and recapitulatory versions of the excerpt (with the Romanesca more available in the recapitulation).
 
-Hypothesis 1a was confirmed as the Prinner schema was rated as easier to hear than the Romanesca. However, the significant interaction between expertise and modulation type showed that this effect stemmed from rigidity in the expert group to be able to alternate interprettions. The intermediate group was more easily able to alternate interpretations, showing that for this group, the excerpt was in fact more bistable. Hypothesis 1b was rejected as there was no interaction between modulation type and sonata section, indicating that the order of presentation did not affect interpretation formation.
+Hypothesis 1a was confirmed as the Prinner schema was rated as easier to hear than the Romanesca. However, the significant interaction between expertise and modulation type showed that this effect stemmed from rigidity in interpreation in the expert group only. The intermediate group was more easily able to alternate interpretations, showing that for this group, the excerpt was in fact more bistable. Hypothesis 1b was rejected as there was no interaction between modulation type and sonata section, indicating that the order of presentation did not affect interpretation formation.
 
 
 #### Second Hypothesis ####
@@ -164,7 +157,7 @@ For the second hypothesis:
 
 **H2:** Participants should be able to more easily form and alternate between scale degree interpretations for a single voice (soprano, bass) than for Galant schemata (which are dependent on the presence of multiple, co-occurring features). 
 
-The second hypothesis was partially supported. The significant main effect of attended feature showed that, overall, bass lines and Galant schemata were equally perceptible, but that the soprano line was much more difficult to hear. The significant interaction of sonata section and attended feature showed that this effect was largely due to differences between the bass and soprano line ratings (DV1) in the recapitulation. I interpret this effect as arising from difficulty in forming interpretations in the exposition in general. However, without a main effect of sonata section, it is difficult to confirm this. The significant interaction of attended feature and modulation type also supports the second hypothesis: early and late modulation interpretations are equally available when attending to the bass voice; however, when switching to a multi-feature attending strategy needed to assess Galant schemata interpretations, Prinner and Romanesca become much less equally available. 
+The second hypothesis was partially supported. The significant main effect of attended feature showed that, overall, bass lines and Galant schemata were equally perceptible, but that the soprano line was much more difficult to hear. The significant interaction of sonata section and attended feature showed that this effect was largely due to differences between the bass and soprano line ratings (DV1) in the recapitulation. I interpret this effect as arising from difficulty in forming interpretations in the exposition in general. However, without a main effect of sonata section, it is difficult to confirm this. The significant interaction of attended feature and modulation type also supports the second hypothesis: early and late modulation interpretations are equally available when attending to the bass voice; however, when switching to a multi-feature attending strategy needed to assess Galant schemata interpretations, Prinner and Romanesca interpretations become much less equally available. 
 
 
 #### Third Hypothesis ####
@@ -173,5 +166,5 @@ And lastly,
 
 **H3:** The ability to form and alternate Galant schemata interpretations may be dependent on moderate familiarity, but not a high-level expertise with Galant schemata (Expertise categories = Novice, Intermediate, Expert). Expertise should therefore be related to increased rigidity of interpretation (Ease of Change on a scale from 1 to 7, low to high), particularly for Schema interpretations, as such categories are overlearned and more likely to be automatically active during listening.
 
-The final hypothesis regarding expertise was supported in multiple ways. The significant main effects of expertise for both DV1 and DV2 showed that the Intermediate group had the highest ease of hearing and ease of change ratings, confirming that they were more easily able to hear both interpretations, and were much more able to alternate between interpretations. The low ease of change (DV2) ratings in both novice and expert groups are particularly interesting because these lower ratings can be attributed to different potential causes. For the novices, the low ease of change (DV2) ratings can be attributed to a lack of category representations for Galant schemata. Contrastingly, the expert groups’ lower ease of change ratings can be attributed to narrow activation of highly elaborated simulators in memory, resulting in a rigidity of interpretation. For the intermediate group, there are enough Galant schemata representations to select from, but the sparser (less elaborated) nature of these traces means that alternating simulator bases is much easier. 
+The final hypothesis regarding expertise was supported in multiple ways. The significant main effects of expertise for both DV1 and DV2 showed that the Intermediate group had the highest ease of hearing and ease of change ratings, confirming that they were more easily able to hear both interpretations, and were much more able to alternate between interpretations. The low ease of change (DV2) ratings in both novice and expert groups are particularly interesting because these lower ratings can be attributed to different potential causes. For the novices, the low ease of change (DV2) ratings can be attributed to a lack of category representations for Galant schemata. Contrastingly, the expert groups’ lower ease of change ratings can be attributed to overlearning of these categories, resulting in a rigidity of interpretation. For the intermediate group, there are enough Galant schemata representations to select from, but the sparser (less elaborated) nature of these memory traces means that alternating intrepretations is much easier. 
 
