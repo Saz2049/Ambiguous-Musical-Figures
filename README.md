@@ -135,9 +135,14 @@ if they had perfect pitch, and what types of strategies they used for forming an
 
 ## Primary Findings and Discussion ## 
 
-Here, I will contextualize the findings in light of the original hypotheses. Firstly, we can safely reject the null hypothesis: 
+Here, I will contextualize the findings in light of the original hypotheses. 
+
+----
+Firstly, we can safely reject the null hypothesis: 
 
 **H0:** This excerpt is not amenable to multiple interpretations, for either scale degree interpretations or Galant schemata.
+
+----
 
 Both excerpts were amenable to multiple interpretations for both scale degree lines and Galant schemata. 
 
