@@ -1,7 +1,11 @@
 # Ambiguous-Musical-Figures
 
-This repository includes the notebooks and R markdown files for the data cleaning, EDA, and analysis for my ambiguous musical figures project. 
-The anonymized data has not been included in this repository, should you have any questions, please feel to reach out anytime! 
+Welcome! 
+
+This repository includes the notebooks and R markdown files for the data cleaning, EDA, and analysis for my ambiguous musical figures project. In this project, I designed a quantitative survey experiment to examine ambiguous figure perception in a musical context. Ever seen the duck-rabbit phenomenon? 
+Essentially, this is the musical equivalent! 
+
+The anonymized data has not been included here, nor have the audio files for space reasons. Should you have any questions, please feel to reach out anytime! 
 
 Included in the repository is: 
 
@@ -10,7 +14,7 @@ Included in the repository is:
 3. Analysis Markdown (R)
 4. Copy of the Survey 
 
-Below is a description of the study methodology, participants, and procedure. For a discussion of the results and findings, please see the R Markdown file.
+Below is a description of the study methodology, participants, procedure, primary findings and discussion. For a detailed discussion of the results and findings, please see the R Markdown file.
 
 ## Introduction ## 
 
@@ -25,6 +29,41 @@ In other words, do differences in auditory attending strategies change the avail
 between two interpretations? 
 3) Is interpretational flexibility related to the amount of training in music theory or experience with relevant music theory concepts 
 (scale degrees, Galant schemata)? 
+
+### Terms Defined ###
+
+**scale degree:** a number or solfege syllable denoting the position of a pitch within the Western tonal system, ordered from 1 through 7. 
+
+**Galant Schemata:** a meaningful pattern known to scholars to be used by composers and performers, and which are relevant musical chunks for listeners.
+Think about Pachabell’s canon, that repeating figure is a shema! They have been given names by scholars. The primary ones used here are Prinner and Romanesca schema. 
+
+**Modulation:** refers here to the modern usage of the term where a piece of music changed from one key (e.g., C major) to another (e.g. G major).
+
+**Soprano (line):** a single musical line of a schema pattern, played in the highest voice.
+
+**Bass (line):** a single musical line of a schema pattern, played in the lowest voice.
+
+**Exposition:** the first section of a sonata form movement.
+
+**Recapitulation:** the last section of a sonata form movement, is a repeated but slightly modified form of the exposition.  
+
+### Hypotheses ###
+
+The resulting hypotheses were: 
+
+**H0:** This excerpt is not amenable to multiple interpretations, using either scale degrees or Galant schemata.
+
+**H1a:** This excerpt is amenable to multiple interpretations in terms of schemata; however, one interpretation (Prinner) 
+may be easier to hear than the other (Romanesca). 
+
+**H1b:** Furthermore, the availability of and ease of change between interpretations may differ between the expositional 
+and recapitulatory versions of the excerpt (with the Romanesca more available in the recapitulation).
+
+**H2:** Participants should be able to more easily form and alternate between scale degree interpretations for a single voice 
+(soprano, bass) than for Galant schemata (which are dependent on the presence of multiple, co-occurring features). 
+
+**H3:** The ability to form and alternate Galant schemata interpretations may be dependent on moderate familiarity, but not a high-level expertise with Galant schemata (Expertise categories = Novice, Intermediate, Expert). Expertise should therefore be related to increased rigidity of interpretation (Ease of Change on a scale from 1 to 7, low to high), particularly for Schema interpretations, as such categories are overlearned and more likely to be automatically active during listening.
+
 
 ## Method ##
 
