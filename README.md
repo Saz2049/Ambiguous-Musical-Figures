@@ -137,6 +137,7 @@ if they had perfect pitch, and what types of strategies they used for forming an
 
 Here, I will contextualize the findings in light of the original hypotheses. 
 
+#### Null Hypothesis ####
 
 Firstly, we can safely reject the null hypothesis: 
 
@@ -144,7 +145,7 @@ Firstly, we can safely reject the null hypothesis:
 
 Both excerpts were amenable to multiple interpretations for both scale degree lines and Galant schemata. 
 
-
+#### First Hypothesis ####
 
 Regarding the first hypothesis:
 
@@ -157,6 +158,7 @@ and
 Hypothesis 1a was confirmed as the Prinner schema was rated as easier to hear than the Romanesca. However, the significant interaction between expertise and modulation type showed that this effect stemmed from rigidity in the expert group to be able to alternate interprettions. The intermediate group was more easily able to alternate interpretations, showing that for this group, the excerpt was in fact more bistable. Hypothesis 1b was rejected as there was no interaction between modulation type and sonata section, indicating that the order of presentation did not affect interpretation formation.
 
 
+#### Second Hypothesis ####
 
 For the second hypothesis:
 
@@ -165,12 +167,11 @@ For the second hypothesis:
 The second hypothesis was partially supported. The significant main effect of attended feature showed that, overall, bass lines and Galant schemata were equally perceptible, but that the soprano line was much more difficult to hear. The significant interaction of sonata section and attended feature showed that this effect was largely due to differences between the bass and soprano line ratings (DV1) in the recapitulation. I interpret this effect as arising from difficulty in forming interpretations in the exposition in general. However, without a main effect of sonata section, it is difficult to confirm this. The significant interaction of attended feature and modulation type also supports the second hypothesis: early and late modulation interpretations are equally available when attending to the bass voice; however, when switching to a multi-feature attending strategy needed to assess Galant schemata interpretations, Prinner and Romanesca become much less equally available. 
 
 
+#### Third Hypothesis ####
 
-Third hypothesis:
+And lastly,
 
 **H3:** The ability to form and alternate Galant schemata interpretations may be dependent on moderate familiarity, but not a high-level expertise with Galant schemata (Expertise categories = Novice, Intermediate, Expert). Expertise should therefore be related to increased rigidity of interpretation (Ease of Change on a scale from 1 to 7, low to high), particularly for Schema interpretations, as such categories are overlearned and more likely to be automatically active during listening.
 
 The final hypothesis regarding expertise was supported in multiple ways. The significant main effects of expertise for both DV1 and DV2 showed that the Intermediate group had the highest ease of hearing and ease of change ratings, confirming that they were more easily able to hear both interpretations, and were much more able to alternate between interpretations. The low ease of change (DV2) ratings in both novice and expert groups are particularly interesting because these lower ratings can be attributed to different potential causes. For the novices, the low ease of change (DV2) ratings can be attributed to a lack of category representations for Galant schemata. Contrastingly, the expert groups’ lower ease of change ratings can be attributed to narrow activation of highly elaborated simulators in memory, resulting in a rigidity of interpretation. For the intermediate group, there are enough Galant schemata representations to select from, but the sparser (less elaborated) nature of these traces means that alternating simulator bases is much easier. 
-
-
 
