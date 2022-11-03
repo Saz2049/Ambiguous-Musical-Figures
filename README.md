@@ -137,14 +137,14 @@ if they had perfect pitch, and what types of strategies they used for forming an
 
 Here, I will contextualize the findings in light of the original hypotheses. 
 
-----
+
 Firstly, we can safely reject the null hypothesis: 
 
 **H0:** This excerpt is not amenable to multiple interpretations, for either scale degree interpretations or Galant schemata.
 
-----
-
 Both excerpts were amenable to multiple interpretations for both scale degree lines and Galant schemata. 
+
+
 
 Regarding the first hypothesis:
 
@@ -156,9 +156,17 @@ and
 
 Hypothesis 1a was confirmed as the Prinner schema was rated as easier to hear than the Romanesca. However, the significant interaction between expertise and modulation type showed that this effect stemmed from rigidity in the expert group to be able to alternate interprettions. The intermediate group was more easily able to alternate interpretations, showing that for this group, the excerpt was in fact more bistable. Hypothesis 1b was rejected as there was no interaction between modulation type and sonata section, indicating that the order of presentation did not affect interpretation formation.
 
+
+
+For the second hypothesis:
+
 **H2:** Participants should be able to more easily form and alternate between scale degree interpretations for a single voice (soprano, bass) than for Galant schemata (which are dependent on the presence of multiple, co-occurring features). 
 
 The second hypothesis was partially supported. The significant main effect of attended feature showed that, overall, bass lines and Galant schemata were equally perceptible, but that the soprano line was much more difficult to hear. The significant interaction of sonata section and attended feature showed that this effect was largely due to differences between the bass and soprano line ratings (DV1) in the recapitulation. I interpret this effect as arising from difficulty in forming interpretations in the exposition in general. However, without a main effect of sonata section, it is difficult to confirm this. The significant interaction of attended feature and modulation type also supports the second hypothesis: early and late modulation interpretations are equally available when attending to the bass voice; however, when switching to a multi-feature attending strategy needed to assess Galant schemata interpretations, Prinner and Romanesca become much less equally available. 
+
+
+
+Third hypothesis:
 
 **H3:** The ability to form and alternate Galant schemata interpretations may be dependent on moderate familiarity, but not a high-level expertise with Galant schemata (Expertise categories = Novice, Intermediate, Expert). Expertise should therefore be related to increased rigidity of interpretation (Ease of Change on a scale from 1 to 7, low to high), particularly for Schema interpretations, as such categories are overlearned and more likely to be automatically active during listening.
 
