@@ -3,15 +3,16 @@ title: "Musical Ambiguous Figure Data Analysis"
 
 output: html_notebook
 ---
-# Musical Ambiguous Figures Project: Data Analysis
 
-**Author:** Sarah Gates
-**Contact** sarahgates22@gmail.com
-**Date:** Summer, 2022
+**Author:** Sarah Gates <br>
+**Contact** sarahgates22@gmail.com <br>
+**Date:** Summer, 2022 <br>
 
 ## Introduction
 
 This R notebook contains the statistical analysis for my Musical Ambiguous Figures project. In the first section, I perform the statistical analyses on the first dependent variable, ease of hearing ratings. I first examine the assumptions for parametric statistical analysis (outliers, normality), then perform a mixed factorical ANOVA to examine the effects of three within-subject factors (sonata section, attended feature and modulation type) and one between subject factor (expertise group) on ease of hearing ratings. Secondly, I perform the same analysis on the second dependent variable, ease of change rating, examining the effects of two within-subject factors (sonata section, attended feature) and one between-subjects factor (expertise) on this DV. 
+
+### Hypotheses
 
 Here are the hypotheses restated: 
 
@@ -23,6 +24,26 @@ Here are the hypotheses restated:
 **H2:** Participants should be able to more easily form and alternate between scale degree interpretations for a single voice (soprano, bass) than for Galant schemata (which are dependent on the presence of multiple, co-occurring features). 
 
 **H3:** The ability to form and alternate Galant schemata interpretations may be dependent on moderate familiarity, but not a high-level expertise with Galant schemata (Expertise categories = Novice, Intermediate, Expert). Expertise should therefore be related to increased rigidity of interpretation (Ease of Change on a scale from 1 to 7, low to high), particularly for Schema interpretations, as such categories are overlearned and more likely to be automatically active during listening.
+
+### Data Dictionary 
+
+`Random_IDs:` randomly generated integer, unique identifier for each participant <br>
+`Sonata_Section:` the section of the sonata form from which the stimuli was taken for that trial (or row, is either exposition or recapitulation) <br>
+`Feature:` the feature (soprano scale degree line, bass scale degree line, or schema) that the participant attended to in that trial (or row) <br>
+`Mod_Type:` the modulation type indicated by the schema (Prinner: modulating, Romanesca: non-modulating) for the trial <br>
+`Education_Level:` the education level of the participant (graduate student, post-doc, professor, other) <br>
+`Year_Theory:` the years of music theory training and/or teaching for each participant <br>
+`Years_Skills:` the years of aural skills training and/or teaching for each participant <br>
+`Schemata_Expertise:` self-reported expertise in Galant schemata theory (completely unfamiliar, somewhat familiar, familiar, very familiar, I am an expert) <br>
+`Excerpt_Familiarity:` self-reported familiarity with the sonata (Mozart, K 280) (First time hearing this, hear before, very familiary) <br>
+`Excerpt_Analysis:` indicates whether the participant has performed score analysis of the sonata (no not at all, yes somewhat, yes extensively) <br>
+`Solfege_Hearing:` integer from 1-7 indicating the participants' ability to hear scale degrees while listening (1: cannot hear, 7: can easily hear) <br>
+`Schema_Hearing:` integer from 1-7 indicating the participants' ability to hear Galant schemata while listening (1: cannot hear, 7: can easily hear) <br>
+`Perfect_Pitch:` whether the participant has perfect pitch or not (yes/no) <br>
+`Interpretation_App:` string of options selected by the participant about how they formed interpretations of the excerpt (e.g., imagery, subvocalization, etc.) <br>
+`Expertise_Group:` constructed variable (see data cleaning notebook) indicating the participants' Galant schema expertise level (novice, intermediate, expert) <br>
+`Expertise_Group_solf:` constructed variable (see data cleaning notebook) indicating the participants' solfege expertise level (novice, intermediate, expert) <br>
+`Order Variables:` variables indicating the order of presentation for each level of stimuli presentation (e.g., Sonata Order = 1 means that the stimuli was presented in the order 'exposition' then 'recapitulation')
 
 -----
 
@@ -52,7 +73,7 @@ str(df)
 
 ## 1. Cursory Exploratory Data Analysis
 
-Here, I examine 
+Here, I examine the assumptions before performing statistical analysis, including examining outliers, normality and variance. <br>
 
 ```{r}
 # grouping by the different IVs
@@ -60,7 +81,8 @@ df %>%
   group_by(Sonata_Section, Feature, Mod_Type, Expertise_Group) %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
-Following this, I will visualize, using a box plot, the 
+<br>
+Here I visualize the DV along each level of the within-subject factors (sonata section, feaure, modulation type). This shows that there are some outliers for the prinner modulation type in the schema attending condition. <br>
 
 ```{r}
 bxp <- ggboxplot(
@@ -70,20 +92,23 @@ bxp <- ggboxplot(
   )
 print(bxp)
 ```
+
 ### Outliers
 
 Then I will use 'identify outliers' on the DV, grouped by all levels of the IVs: this shows that several participants have outlier values, including participants 495,473,268, 475, 834,883, 862 and 392. This shows that within each of these subgroups of IVS (e.g. Exposition-Bass-Prinner-Expert), that their individual value for the DV is considered an outlier. 
+<br>
 
 ```{r}
 df %>%
   group_by(Sonata_Section, Feature, Mod_Type, Expertise_Group) %>%
   identify_outliers(DV)
 ```
+
 ### Assumption of Normality: Shapiro-Wilk Test
 
 Secondly, we can use the Shapiro-Wilk test to examine whether the DV is normally distributed across levels of the IV. 
 
-Given that nearly all of the p-values are significant here, it is evident that there are sphericity violations in this dataset. As such, Greenhouse-Geisser corrections to p-values will be applied where applicable. Similarly, as the assumption of normality has been violated, all significant effects flagged in the ANOVA will be examined using the non-parametric Tukey HSD post-hoc test.
+Given that nearly all of the p-values are significant here, it is evident that there are sphericity violations in this dataset. As such, Greenhouse-Geisser corrections to p-values will be applied where applicable. Similarly, as the assumption of normality has been violated, all significant effects flagged in the ANOVA will be examined using the non-parametric Tukey HSD post-hoc test.<br>
 
 ```{r}
 df %>%
@@ -92,7 +117,7 @@ df %>%
 ```
 #### QQ Plot
 
-We can also visualize these violations using QQplots: 
+We can also visualize these violations using QQplots.  
 
 ```{r}
 ggqqplot(df, "DV", ggtheme = theme_bw()) +
@@ -124,9 +149,9 @@ df %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
 
-## 2. Four-Way Mixed ANOVA: 2*3*2 Factorial Design (Sonata Section, Feature, Modulation Type)
+## 2. Four-Way Mixed ANOVA: 2* 3* 2 Factorial Design (Sonata Section, Feature, Modulation Type)
 
-The survey design resulted in a four-way mixed ANOVA design, with 2*3*2 factorial design for the within-subject factors, and three levels of the between-subject factor. The within-subject factors included two levels of sonata section (exposition, recapitulation), three levels of attended feature (bass, soprano, schema) and two levels of modulation type (Prinner, Romanesca). The between-subject factor included the three levels of expertise group (expert, intermediate, novice). 
+The survey design resulted in a four-way mixed ANOVA design, with 2* 3* 2 factorial design for the within-subject factors, and three levels of the between-subject factor. The within-subject factors included two levels of sonata section (exposition, recapitulation), three levels of attended feature (bass, soprano, schema) and two levels of modulation type (Prinner, Romanesca). The between-subject factor included the three levels of expertise group (expert, intermediate, novice). 
 
 A four-way mixed ANOVA was performed in R using the rstatix package to evaluate the effects of sonata section, attended feature, modulation type and expertise on the ease of hearing ratings. The dataset included sphericity violations for the within-subject factors as assessed by Shapiro-Wilk’s test of normality for all conditions except for ratings in the exposition in the soprano condition for the Romanesca modulation type (p = 0.109). As a result, p-values using Greenhouse-Geisser corrections (where applicable) were used. There was homogeneity of variances (p > 0.05) as assessed by Levene’s test of homogeneity of variances. 
 
@@ -152,11 +177,11 @@ This analysis shows that there was a significant main effect of expertise (p = 0
 
 I will now examine each of these effects using non-parametrics Tukey HSD tests to determine which pair-wise differences the significant effects stem from. 
 
-
+----
 
 ### Examining the Main Effects
 
-Here, I examine the main effects using non-parametric tuckey hsd tests on each statistically significant main effect. 
+Here, I examine the main effects using non-parametric tuckey hsd tests on each statistically significant main effect. <br>
 
 
 **Expertise**
@@ -178,7 +203,7 @@ df %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
 
-This analysis shows that both expert (M = 5.13, sd = 2.21) and intermediate (M = 5.35, sd = 1.60) groups differ from the novice (M = 3.56, sd = 2.17) group. Both expert and intermediate ease of hearing ratings are significantly higher than novice ease of hearing ratings. 
+This analysis shows that both expert (M = 5.13, sd = 2.21) and intermediate (M = 5.35, sd = 1.60) groups differ from the novice (M = 3.56, sd = 2.17) group. Both expert and intermediate ease of hearing ratings are significantly higher than novice ease of hearing ratings. <br>
 
 
 **Feature**
@@ -197,7 +222,7 @@ df %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
 
-The main effect of feature stems from the significant difference between bass (M = 5.44, sd = 1.62) and soprano (M = 4.38, sd = 2.08) features. This suggests that the soprano line was the most difficult to hear and attend to.
+The main effect of feature stems from the significant difference between bass (M = 5.44, sd = 1.62) and soprano (M = 4.38, sd = 2.08) features. This suggests that the soprano line was the most difficult to hear and attend to.<br>
 
 
 **Modulation Type**
@@ -216,12 +241,14 @@ df %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
 
-The main effect of modulation type shows that the Prinner (M = 5.18, sd = 1.95) was easier to hear than the Romanesca (M = 4.65, sd = 2.02). 
+The main effect of modulation type shows that the Prinner (M = 5.18, sd = 1.95) was easier to hear than the Romanesca (M = 4.65, sd = 2.02). <br>
+
+-----
 
 
 ### Examining Two-Way Interactions
 
-In this section, I examine the significant two way interactions between expertise group and feature (p = 0.030), expertise group and modulation type (p = 0.024), sonata section and feature (p = 0.006), and feature and modulation type (p = 0.010). 
+In this section, I examine the significant two way interactions between expertise group and feature (p = 0.030), expertise group and modulation type (p = 0.024), sonata section and feature (p = 0.006), and feature and modulation type (p = 0.010). <br>
 
 
 **Expertise and Feature**
@@ -244,7 +271,7 @@ df %>%
   get_summary_stats(DV, type = "mean_sd") 
 ```
 
-The post-hoc Tukey HSD examining the interaction between expertise group and feature shows that for only the novice group did the bass (M = 4.88, sd = 2.07) and soprano (M = 2.51, sd = 1.62) differ significantly. 
+The post-hoc Tukey HSD examining the interaction between expertise group and feature shows that for only the novice group did the bass (M = 4.88, sd = 2.07) and soprano (M = 2.51, sd = 1.62) differ significantly. <br>
 
 
 **Expertise and Modulation**
@@ -264,7 +291,7 @@ df %>%
   get_summary_stats(DV, type = "mean_sd") 
 ```
 
-The analysis examining the interaction of expertise group and modulation type shows that only for the expert group did Prinner (M = 6.34, sd = 1.50) and Romanesca (M = 4.02, sd = 2.08) schema differ. 
+The analysis examining the interaction of expertise group and modulation type shows that only for the expert group did Prinner (M = 6.34, sd = 1.50) and Romanesca (M = 4.02, sd = 2.08) schema differ. <br>
 
 
 **Sonata Section and Feature**
@@ -285,7 +312,7 @@ df %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
 
-The Tukey HSD test on the interaction between sonata section and feature revealed that only for the recapitulation did soprano (M = 4.17, sd = 2.13) and bass (M = 5.59, sd = 1.44) significantly differ. 
+The Tukey HSD test on the interaction between sonata section and feature revealed that only for the recapitulation did soprano (M = 4.17, sd = 2.13) and bass (M = 5.59, sd = 1.44) significantly differ. <br>
 
 
 **Feature and Modulation Type**
@@ -305,12 +332,12 @@ df %>%
   get_summary_stats(DV, type = "mean_sd")
 ```
 
-The post hoc Tukey HSD test revealed that for the schema attending condition only did Prinner (M = 5.70, sd = 1.81) and Romanesca (M = 4.15, sd = 2.17) interpretations differ. 
+The post hoc Tukey HSD test revealed that for the schema attending condition only did Prinner (M = 5.70, sd = 1.81) and Romanesca (M = 4.15, sd = 2.17) interpretations differ. <br>
 
 
 ### Examining Effect of Stimuli Presentation Order
 
-In order to examine in the order in which stimuli was presented had an effect on interpretation formation, a second ANOVA including Sonata Order as a between-subjects factor, in addition to expertise group, was completed. This showed however that there was no effect of order of presentation of sonata section on the DV. 
+In order to examine in the order in which stimuli was presented had an effect on interpretation formation, a second ANOVA including Sonata Order as a between-subjects factor, in addition to expertise group, was completed. This showed however that there was no effect of order of presentation of sonata section on the DV. <br>
 
 ```{r}
 res.aov.order <- anova_test(
@@ -338,11 +365,16 @@ str(df2)
 
 ## 1. Cursory EDA 
 
+Here I examine outliers and assumptions of normality and variance prior to statistical analysis.<br>
+
 ```{r}
 df2 %>%
   group_by(Feature) %>%
   get_summary_stats(DV2, type = "mean_sd")
 ```
+## Outliers
+
+The outlier analysis shows that the novice and intermediate groups have some outliers across most attended features. These came primarily from two participants (473 and 913), who provided very low ratings (intermediate group) and relatively high ratings (novice group) compared to their peers. I will however be keeping all datapoints because of the small sample size in the current dataset. <br>
 
 ```{r}
 bxp2 <- ggboxplot(
@@ -389,7 +421,7 @@ df2 %>%
 
 ## 2. Three-Way Mixed ANOVA: 2*3 Factorial Design (Sonata Section, Feature)
 
-A mixed ANOVA was performed in order to examine the effects of two within subject factors (sonata section and feature) as well as one between subject factor (expertise group) on DV2, ease of change rating.
+A mixed ANOVA was performed in order to examine the effects of two within subject factors (sonata section and feature) as well as one between subject factor (expertise group) on DV2, ease of change rating.<br>
 
 ```{r}
 res.aov.bet2 <- anova_test(
@@ -404,13 +436,13 @@ get_anova_table(res.aov.bet2, correction="GG")
 res.aov.bet2$'Sphericity Corrections'
 ```
 
-The analysis revealed that there were only main effets of expertise group (p = 0.024) and feature (p = 0.022).
+The analysis revealed that there were only main effets of expertise group (p = 0.024) and feature (p = 0.022).<br>
 
 
 
 ### Examining the Main Effects
 
-Here I will use Tukey HSD tests to examine the main effects. 
+Here I will use Tukey HSD tests to examine the main effects. <br>
 
 
 **Expertise**
@@ -426,7 +458,7 @@ df2 %>%
   get_summary_stats(DV2, type = "mean_sd")
 ```
 
-As was the case with DV1 (ease of hearing ratings), both expert (M = 3.57, sd = 2.06) and intermediate (M = 4.48, sd = 1.75) differed from the novice (M = 1.87, sd = 1.50), indicating that novices struggled to change interpretations. 
+As was the case with DV1 (ease of hearing ratings), both expert (M = 3.57, sd = 2.06) and intermediate (M = 4.48, sd = 1.75) differed from the novice (M = 1.87, sd = 1.50), indicating that novices struggled to change interpretations. <br>
 
 
 **Feature**
@@ -444,7 +476,7 @@ df2 %>%
   get_summary_stats(DV2, type = "mean_sd")
 ```
 
-While the ANOVA revealed a significant effect of feature for DV2, the more conservative nonparametric Tukey HSD test showed that all pair-wise differences of feature were nonsignificant. 
+While the ANOVA revealed a significant effect of feature for DV2, the more conservative nonparametric Tukey HSD test showed that all pair-wise differences of feature were nonsignificant. <br>
 
 ------
 
