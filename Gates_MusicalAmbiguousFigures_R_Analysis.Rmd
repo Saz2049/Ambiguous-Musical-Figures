@@ -43,7 +43,12 @@ Here are the hypotheses restated:
 `Interpretation_App:` string of options selected by the participant about how they formed interpretations of the excerpt (e.g., imagery, subvocalization, etc.) <br>
 `Expertise_Group:` constructed variable (see data cleaning notebook) indicating the participants' Galant schema expertise level (novice, intermediate, expert) <br>
 `Expertise_Group_solf:` constructed variable (see data cleaning notebook) indicating the participants' solfege expertise level (novice, intermediate, expert) <br>
-`Order Variables:` variables indicating the order of presentation for each level of stimuli presentation (e.g., Sonata Order = 1 means that the stimuli was presented in the order 'exposition' then 'recapitulation')
+`Order Variables:` variables indicating the order of presentation for each level of stimuli presentation (e.g., Sonata Order = 1 means that the stimuli was presented in the order 'exposition' then 'recapitulation') <br>
+
+**Targets**
+
+`DV:` ease of hearing rating on a scale from 1-7 <br>
+`DV2:` ease of change rating on a scale from 1-7
 
 -----
 
